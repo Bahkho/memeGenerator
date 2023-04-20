@@ -8,6 +8,9 @@ export default function App() {
   const toggleDarkMode = () => {
     setTheme((prev) => !prev);
   };
+  React.useEffect(() => {
+    document.body.style.backgroundColor = theme ? "#fff" : "#555";
+  }, [theme]);
 
   return (
     <div>
