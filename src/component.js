@@ -10,16 +10,20 @@ export default function Meme(props) {
   const [allMemes, setAllMemes] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("https://api.imgflip.com/get_memes")
-      .then((response) => response.json())
-      .then((memesData) => setAllMemes(memesData.data.memes));
-    // USING ASYNC AND AWAIT FOR FETCHING API
-    // async function getMemes() {
-    //   const response = await fetch("https://api.imgflip.com/get_memes");
-    //   const memesData = await response.json();
-    //   setAllMemes(memesData.data.memes);
-    // }
-    // getMemes();
+    // fetch("https://api.imgflip.com/get_memes")
+    //   .then((response) => response.json())
+    //   .then((memesData) => setAllMemes(memesData.data.memes));
+    // USING ASYNC AND AWAIT FOR FETCHING API AND TRY CATCH FOR ERROR HANDLING
+    async function getMemes() {
+      try {
+        const response = await fetch("https://api.imgflip.com/get_memes");
+        const memesData = await response.json();
+        setAllMemes(memesData.data.memes);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getMemes();
   }, []);
 
   const getMemeImage = () => {
@@ -58,7 +62,10 @@ export default function Meme(props) {
           value={meme.bottomText}
           onChange={handleChange}
         />
-        <button className={props.mode ? "form--button" : "form--button--darkMode"} onClick={getMemeImage}>
+        <button
+          className={props.mode ? "form--button" : "form--button--darkMode"}
+          onClick={getMemeImage}
+        >
           Get a new meme image 🖼
         </button>
       </div>
