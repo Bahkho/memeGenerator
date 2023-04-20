@@ -4,7 +4,7 @@ import Component from "./component";
 import "./style.css";
 
 export default function App() {
-  const [theme, setTheme] = React.useState(true);
+  const [theme, setTheme] = React.useState(false);
   const toggleDarkMode = () => {
     setTheme((prev) => !prev);
   };
